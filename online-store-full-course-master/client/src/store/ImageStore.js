@@ -1,0 +1,65 @@
+import {makeAutoObservable} from "mobx";
+
+export default class ImageStore {
+    constructor() {
+        this._friends = []
+        this._themes = []
+        this._images = []
+        this._selectedFriend = {}
+        this._selectedTheme = {}
+        this._page = 1
+        this._totalCount = 0
+        this._limit = 3
+        makeAutoObservable(this)
+    }
+
+    setFriends(friends) {
+        this._friends = friends
+    }
+    setThemes(themes) {
+        this._themes = themes
+    }
+    setImages(images) {
+        this._images = images
+    }
+
+    setSelectedFriend(friend) {
+        this.setPage(1)
+        this._selectedFriend = friend
+    }
+    setSelectedTheme(theme) {
+        this.setPage(1)
+        this._selectedTheme = theme
+    }
+    setPage(page) {
+        this._page = page
+    }
+    setTotalCount(count) {
+        this._totalCount = count
+    }
+
+    get friends() {
+        return this._friends
+    }
+    get themes() {
+        return this._themes
+    }
+    get images() {
+        return this._images
+    }
+    get selectedFriend() {
+        return this._selectedFriend
+    }
+    get selectedTheme() {
+        return this._selectedTheme
+    }
+    get totalCount() {
+        return this._totalCount
+    }
+    get page() {
+        return this._page
+    }
+    get limit() {
+        return this._limit
+    }
+}
