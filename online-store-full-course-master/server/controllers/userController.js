@@ -48,6 +48,21 @@ class UserController {
         return res.json({token})
     }
 
+    async info(req, res, next) {
+        const {email} = req.body
+        const user = await User.findOne({where: {email}})
+        if (!user) {
+            return next(ApiError.internal('Пользователь не найден'))
+        }
+
+        const userinfo = {id : user.id,
+                    nick_name : user.nick_name,
+                    first_name : user.first_name,
+                    second_name : user.second_name,
+                    email: user.email};
+        return res.json({userinfo})
+    }
+
     async check(req, res, next) {
         const token = generateJwt(req.user.id, req.user.email, req.user.role)
         return res.json({token})

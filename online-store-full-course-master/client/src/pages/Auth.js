@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import {NavLink, useLocation, useHistory} from "react-router-dom";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, GALLERY_ROUTE} from "../utils/consts";
-import {login, registration} from "../http/userAPI";
+import {login, registration, info} from "../http/userAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 
@@ -24,16 +24,22 @@ const Auth = observer(() => {
     const click = async () => {
         try {
             let data;
+            let userdata;
             if (isLogin) {
                 data = await login(email, password);
+                userdata = await info(email);
             } else {
                 data = await registration(email, password, first_name, second_name, nick_name, birthday);
+                userdata = await info(email);
             }
             user.setUser(user)
             user.setIsAuth(true)
+            localStorage.setItem('userId', userdata.userinfo.id);
+            localStorage.setItem('userName', userdata.userinfo.nick_name);
             history.push(GALLERY_ROUTE)
         } catch (e) {
-            alert(e.response.data.message)
+            alert(e.response.data.message);
+            console.error(e.response.data.message);
         }
 
     }

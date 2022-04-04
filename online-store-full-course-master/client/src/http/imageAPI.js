@@ -37,3 +37,8 @@ export const fetchOneImage = async (id) => {
     const {data} = await $authHost.get('api/image/' + id)
     return data
 }
+
+export const dis_like = async (imageId, userId, meaning) =>{ 
+    const {data} = await $authHost.post('api/dis_like/', {imageId, userId, meaning})
+    return data
+}

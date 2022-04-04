@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dislikeBtn {
+  color: red;
+}
+.likeBtn {
+  color: rgb(41, 224, 74);
+}
+span:hover{
+color: blue;
+}
