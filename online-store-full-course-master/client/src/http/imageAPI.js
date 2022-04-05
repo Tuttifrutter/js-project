@@ -40,5 +40,30 @@ export const fetchOneImage = async (id) => {
 
 export const dis_like = async (imageId, userId, meaning) =>{ 
     const {data} = await $authHost.post('api/dis_like/', {imageId, userId, meaning})
+
+    const strL="likeBtn"; const strD="dislikeBtn";
+    var btn = document.getElementById("lbtn"+imageId);
+    var btn2 = document.getElementById("dbtn"+imageId);
+
+    if(meaning =='1'){
+        if(btn.classList.contains(strL)){
+            btn.classList.remove(strL);   
+        }else{
+             btn.classList.add(strL);
+             if(btn2.classList.contains(strD));
+             btn2.classList.remove(strD); 
+        }
+    } else {
+        if(btn2.classList.contains(strD)){
+            btn2.classList.remove(strD);   
+        }else{
+             btn2.classList.add(strD);
+             if(btn.classList.contains(strL));
+             btn.classList.remove(strL); 
+        }
+    }
+
+    document.getElementById("likeNum"+imageId).innerHTML=data.like_count;
+    document.getElementById("dislikeNum"+imageId).innerHTML=data.dislike_count;
     return data
 }

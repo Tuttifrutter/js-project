@@ -27,31 +27,15 @@ const ImageItem = ({image, user}) => {
             </Col>
             <div className={styles.Card__communication}>
         
-                <span id = "btn"  onClick={ like =>{dis_like(image.id, localStorage.getItem('userId'), '1');
-                                                                            var btn = document.getElementById("btn");
-                                                                            if(btn.classList.contains("likeBtn")){
-                                                                                btn.classList.remove("likeBtn") 
-                                                                            }else{
-                                                                                btn.classList.add("likeBtn")
-                                                                            }
-                                                                            window.location.reload();
-                                                                            }}>
+                <span id = {"lbtn"+image.id}  onClick={ like =>{dis_like(image.id, localStorage.getItem('userId'), '1'); }}>
                 <a class="material-icons">thumb_up </a>                                                               
                 </span>
                   
-                <span>{image.like_count}</span>
-                <span id = "btn2" onClick={dislike => {dis_like(image.id, localStorage.getItem('userId'), '0');
-                                                                var btn = document.getElementById("btn2");
-                                                                if(btn.classList.contains("dislikeBtn")){
-                                                                    btn.classList.remove("dislikeBtn") 
-                                                                }else{
-                                                                    btn.classList.add("dislikeBtn")
-                                                                }
-                                                                window.location.reload();
-                                                                }}>
+                <span id = {"likeNum"+image.id}>{image.like_count}</span>
+                <span id = {"dbtn"+image.id} onClick={dislike => {  dis_like(image.id, localStorage.getItem('userId'), '0'); }}>
                 <a class="material-icons">thumb_down </a>
                 </span>
-                <span onTimeUpdate={1}>{image.dislike_count}</span>    
+                <span id={"dislikeNum"+image.id}>{image.dislike_count}</span>    
                   
                 <span class="material-icons">
                     send
