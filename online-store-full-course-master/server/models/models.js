@@ -9,7 +9,8 @@ const User = sequelize.define('user', {
     birthday: { type: DataTypes.DATE},
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING},
-    role: {type: DataTypes.STRING, defaultValue: "USER"}
+    role: {type: DataTypes.STRING, defaultValue: "USER"},
+    img:{type: DataTypes.STRING(1000)}
 })
 
 const Image = sequelize.define('image', {

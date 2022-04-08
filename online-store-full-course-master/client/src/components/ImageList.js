@@ -3,15 +3,21 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {Row} from "react-bootstrap";
 import ImageItem from "./ImageItem";
+import { userInfo} from "../http/userAPI.js"
+
 
 const ImageList = observer(() => {
-    const {image, user} = useContext(Context)
-
+    const {image} = useContext(Context);
+    
     return (
         <Row className="d-flex">
-            {image.images.map(image =>
-                <ImageItem key={image.id} image={image} user ={user}/>
-            )}
+            {
+            image.images.map(image =>
+                <ImageItem key={image.id} image={image} user={
+                userInfo(image.userId).then(data =>localStorage.setItem("imgUserInfo"+image.id, data))
+                }/>
+            )
+            }
         </Row>
     );
 });

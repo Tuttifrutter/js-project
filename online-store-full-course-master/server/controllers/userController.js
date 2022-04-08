@@ -59,8 +59,26 @@ class UserController {
                     nick_name : user.nick_name,
                     first_name : user.first_name,
                     second_name : user.second_name,
-                    email: user.email};
+                    email: user.email,
+                    img: user.img};
         return res.json({userinfo})
+    }
+
+    async userInfo(req, res, next) {
+        const {userId} = req.body
+        const id = userId;
+        const user = await User.findOne({where: {id}})
+        if (!user) {
+            return next(ApiError.internal('Пользователь не найден'))
+        }
+
+        const userinfo = {id : user.id,
+                    nick_name : user.nick_name,
+                    first_name : user.first_name,
+                    second_name : user.second_name,
+                    email: user.email,
+                    img: user.img};
+        return res.json(userinfo)
     }
 
     async check(req, res, next) {

@@ -8,6 +8,8 @@ import {Button} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import Container from "react-bootstrap/Container";
 import {useHistory} from 'react-router-dom'
+import {getUserProfile} from "../http/imageAPI";
+import Image from "react-bootstrap/Image";
 import styles from './Header/Header.module.css' 
 import st from './iconfont/material-icons.css'
 
@@ -18,13 +20,16 @@ const NavBar = observer(() => {
     const logOut = () => {
         user.setUser({})
         user.setIsAuth(false)
-        localStorage.removeItem('token')
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userId')
+        localStorage.removeItem('userAvatar')
     }
 
     return (
         <Navbar bg="light" expand="lg">
+            
             <Container>
-       
             <nav className={styles.Header__logo}>PhotoApp</nav>
             <div >
             <input type="text" placeholder="Поиск" className={styles.Header__search}/>
@@ -40,7 +45,7 @@ const NavBar = observer(() => {
                     </span>
                 </div> 
                 <div className={styles.Header__item}>
-                    <span class="material-icons">
+                    <span class="material-icons" >
                         send
                     </span>    
                 </div> 
@@ -55,6 +60,7 @@ const NavBar = observer(() => {
                     </span>    
                 </div> 
                 <div className={styles.Header__item}></div> 
+                
                 {user.isAuth ?
                     <Nav className="ml-auto">
                         <Button
@@ -70,6 +76,9 @@ const NavBar = observer(() => {
                         >
                             Logout
                         </Button>
+                        
+                        <Image id="myAvatar" className={styles.Header__userLogo} width='30' height='30'src={getUserProfile()}/>
+                            <nav id="myName" className={styles.Header__userName}>{}</nav>
                     </Nav>
                     :
                     <Nav className="ml-auto" style={{color: 'white'}}>
@@ -77,7 +86,7 @@ const NavBar = observer(() => {
                     </Nav>
                 }
             </div>
-         
+
                 
             </Container>
         </Navbar>

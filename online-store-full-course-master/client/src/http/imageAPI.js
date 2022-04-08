@@ -1,5 +1,7 @@
 import {$authHost, $host} from "./index";
 import jwt_decode from "jwt-decode";
+import { userInfo } from "./userAPI";
+
 
 export const createFriend = async (friend) => {
     const {data} = await $authHost.post('api/friend', friend)
@@ -67,3 +69,24 @@ export const dis_like = async (imageId, userId, meaning) =>{
     document.getElementById("dislikeNum"+imageId).innerHTML=data.dislike_count;
     return data
 }
+
+export function getUserProfile(){
+    setTimeout(()=>{
+        if(document.getElementById("myName")!=null && document.getElementById("myAvatar")!=0){
+    document.getElementById("myName").innerHTML=localStorage.getItem("userName");
+    document.getElementById("myAvatar").src = process.env.REACT_APP_API_URL+localStorage.getItem("userAvatar");;
+    }}, 300)
+   
+ }
+
+ export function getImgNick(imageId){
+    setTimeout(()=>{
+        if(document.getElementById("nickName"+imageId)!=null){
+            const res = localStorage.getItem("imgUserInfo"+imageId).split(" ");
+            const nick = res[0].slice(res[0].indexOf("'")+1, res[0].lastIndexOf("'"));
+            const img = res[1].slice(res[1].indexOf("'")+1, res[1].lastIndexOf("'"));
+        document.getElementById("nickName"+imageId).innerHTML = nick;
+        document.getElementById("userImg"+imageId).src = process.env.REACT_APP_API_URL +img;
+    }}, 10)
+   
+ }

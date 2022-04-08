@@ -23,3 +23,9 @@ export const info = async (email) => {
     const {data} = await $host.post('api/user/info', {email})
     return data
 }
+
+export const userInfo = async (userId) => {
+     const {data} = await $host.post('api/user/userinfo', {userId})
+     const res = "nick='"+data.nick_name+"' img='"+data.img+"'";
+     return res
+}

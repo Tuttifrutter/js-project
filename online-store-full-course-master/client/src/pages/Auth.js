@@ -34,8 +34,11 @@ const Auth = observer(() => {
             }
             user.setUser(user)
             user.setIsAuth(true)
-            localStorage.setItem('userId', userdata.userinfo.id);
-            localStorage.setItem('userName', userdata.userinfo.nick_name);
+            if(userdata){
+                localStorage.setItem('userId', userdata.userinfo.id);
+                localStorage.setItem('userName', userdata.userinfo.nick_name);
+                localStorage.setItem('userAvatar',userdata.userinfo.img);
+            }
             history.push(GALLERY_ROUTE)
         } catch (e) {
             alert(e.response.data.message);

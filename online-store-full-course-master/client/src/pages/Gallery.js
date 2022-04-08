@@ -7,12 +7,11 @@ import ThemeBar from "../components/ThemeBar";
 import ImageList from "../components/ImageList";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {fetchThemes, fetchImages, fetchFriends, like, dislike} from "../http/imageAPI";
+import {fetchThemes, fetchImages, fetchFriends} from "../http/imageAPI";
 import Pages from "../components/Pages";
 
 const Gallery = observer(() => {
     const {image} = useContext(Context)
-
     useEffect(() => {
         fetchFriends().then(data => image.setFriends(data))
         fetchThemes().then(data => image.setThemes(data))
