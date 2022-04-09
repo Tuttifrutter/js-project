@@ -1,21 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
 import bigStar from '../assets/bigStar.png'
 import {useParams} from 'react-router-dom'
-import {fetchOneImage} from "../http/imageAPI";
+import {fetchOneImage, getComments, dataParse} from "../http/imageAPI";
+import {Context} from "../index";
+import CommentList from '../components/CommentList';
+import { observer } from 'mobx-react-lite';
 
-const ImagePage = () => {
-    const [image, setImage] = useState({info: []})
+const ImagePage  = observer(() => {
+    const [imagel, setImage] = useState({info: []})
     const {id} = useParams()
+    const {image} = useContext(Context)
+
     useEffect(() => {
-        fetchOneImage(id).then(data => setImage(data))
+        fetchOneImage(id).then(data => setImage(data));
+        getComments(id).then(data => image.setComments(data));
     }, [])
 
     return (
         <Container className="mt-3">
             <Row>
                 <Col md={7}>
-                    <Image width={600} height={600} src={process.env.REACT_APP_API_URL + image.img}/>
+                    <Image width={600} height={600} src={process.env.REACT_APP_API_URL + imagel.img}/>
                 </Col>
                 <Col md={1}>
                     <Row className="d-flex flex-column align-items-center">
@@ -24,7 +30,7 @@ const ImagePage = () => {
                             className="d-flex align-items-center justify-content-center"
                             style={{background: `url(${bigStar}) no-repeat center center`, width:96, height: 96, backgroundSize: 'cover', fontSize:64}}
                         >
-                            {image.like_count}
+                            {imagel.like_count}
                         </div>
                     </Row>
                 </Col>
@@ -35,13 +41,22 @@ const ImagePage = () => {
                             className="d-flex align-items-center justify-content-center"
                             style={{background: `url(${bigStar}) no-repeat center center`, width:96, height: 96, backgroundSize: 'cover', fontSize:64}}
                         >
-                            {image.dislike_count}
+                            {imagel.dislike_count}
                         </div>
                     </Row>
+                    <h1></h1>
+                    <Row><h5><div>{imagel.text}</div></h5></Row>
+                    
                 </Col>
+                
             </Row>
+            <h7>{dataParse(imagel.createdAt)}</h7>
+            <Col md={2}>
+            <h2>COMMENTS</h2>       
+                    <CommentList/>
+            </Col>
         </Container>
     );
-};
+})
 
 export default ImagePage;

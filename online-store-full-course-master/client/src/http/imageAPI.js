@@ -1,6 +1,5 @@
 import {$authHost, $host} from "./index";
 import jwt_decode from "jwt-decode";
-import { userInfo } from "./userAPI";
 
 
 export const createFriend = async (friend) => {
@@ -79,14 +78,37 @@ export function getUserProfile(){
    
  }
 
- export function getImgNick(imageId){
+ export function getImgNick(id, local){
     setTimeout(()=>{
-        if(document.getElementById("nickName"+imageId)!=null){
-            const res = localStorage.getItem("imgUserInfo"+imageId).split(" ");
+        if(document.getElementById("nickName"+id)!=null){
+            const res = localStorage.getItem(local+id).split(" ");
             const nick = res[0].slice(res[0].indexOf("'")+1, res[0].lastIndexOf("'"));
             const img = res[1].slice(res[1].indexOf("'")+1, res[1].lastIndexOf("'"));
-        document.getElementById("nickName"+imageId).innerHTML = nick;
-        document.getElementById("userImg"+imageId).src = process.env.REACT_APP_API_URL +img;
+        document.getElementById("nickName"+id).innerHTML = nick;
+        document.getElementById("userImg"+id).src = process.env.REACT_APP_API_URL +img;
     }}, 10)
-   
  }
+
+ export const getComments = async (imageId) => {
+    const {data} = await $authHost.get('api/comment',{params: {imageId}})
+    return data
+}
+
+export function dataParse(data){
+    let dt;
+    if(data!=null && data!=undefined){
+    dt = data.split("T");
+    const date = dt[0]; 
+    const time = dt[1]; 
+    const ymd =date.split("-");
+    const y = ymd[0];
+    const m = ymd[1];
+    const d = ymd[2];
+    const hm = time.split(":");
+    const h = (parseInt(hm[0])+3).toString();
+    const min = hm[1]; 
+    return d+"/"+m+"/"+y+" "+h+":"+min;
+    }else
+        return "wrong time format"
+    
+}

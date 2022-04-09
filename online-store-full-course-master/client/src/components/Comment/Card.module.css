@@ -1,0 +1,56 @@
+.Card {
+    width: 600px;
+    height: 142px;
+    border: 1px solid #dbdbdb;
+  }
+  .Card__userLogo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: black;
+    margin: 15px 15px 0px 10px;
+  }
+  .Card__header {
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    box-sizing: border-box;
+  }
+  .Card__userDate {
+    margin-right: auto;
+  }
+  .Card__userName {
+    font-weight: 700;
+    font-size: medium;
+    margin-left: 50px;
+    margin-top: -35px;
+  }
+  .Card__burger {
+    font-weight: 700;
+    cursor: pointer;
+    opacity: 0.7;
+    margin-left: 560px;
+    margin-top: -30px;
+  }
+  .Card__content {
+    width: 100%;
+    height: 614px;
+    background-color: brown;
+  }
+  .Card__communication {
+    margin-top: 20px;
+    width: 100%;
+    height: 40 px;
+    margin-left: 20px;
+  }
+  .Card__userPosition{
+    font-weight: 300;
+    font-size: small;
+    margin-top: -5px;
+    margin-left: 50px;
+  }
+  
+  .activeButton {
+    color: red;
+  }

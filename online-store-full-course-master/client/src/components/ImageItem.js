@@ -16,7 +16,7 @@ const ImageItem = ({image, user}) => {
             <div className={styles.Card__header}>
                 <Image id = {"userImg"+image.id} className={styles.Card__userLogo}/>
                 <div clasName={styles.Card_userDate}>
-                    <div id = {"nickName"+image.id}className={styles.Card__userName}>{getImgNick(image.id)} </div>
+                    <div id = {"nickName"+image.id}className={styles.Card__userName}>{getImgNick(image.id, "imgUserInfo")} </div>
                     <div className={styles.Card__userPosition}>{image.location}</div>
                 </div>
                 <div className={styles.Card__burger}>

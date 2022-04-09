@@ -5,12 +5,17 @@ export default class ImageStore {
         this._friends = []
         this._themes = []
         this._images = []
+        this._comments =[]
         this._selectedFriend = {}
         this._selectedTheme = {}
         this._page = 1
         this._totalCount = 0
         this._limit = 3
         makeAutoObservable(this)
+    }
+
+    setComments(comments){
+        this._comments = comments
     }
 
     setFriends(friends) {
@@ -38,6 +43,9 @@ export default class ImageStore {
         this._totalCount = count
     }
 
+    get comments(){
+        return this._comments
+    }
     get friends() {
         return this._friends
     }
@@ -62,4 +70,5 @@ export default class ImageStore {
     get limit() {
         return this._limit
     }
+
 }
