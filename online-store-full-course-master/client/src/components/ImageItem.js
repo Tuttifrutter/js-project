@@ -28,13 +28,13 @@ const ImageItem = ({image, user}) => {
             </Col>
             <div className={styles.Card__communication}>
         
-                <span id = {"lbtn"+image.id}  onClick={ like =>{dis_like(image.id, image.userId, '1'); }}>
+                <span id = {"lbtn"+image.id}  onClick={ like =>{dis_like(image.id, localStorage.getItem('userId'), '1'); }}>
                 <a class="material-icons">thumb_up </a>                  
                                                          
                 </span>
                   
                 <span id = {"likeNum"+image.id}>{image.like_count}</span>
-                <span id = {"dbtn"+image.id} onClick={dislike => {dis_like(image.id, image.userId, '0'); }}>
+                <span id = {"dbtn"+image.id} onClick={dislike => {dis_like(image.id, localStorage.getItem('userId'), '0'); }}>
                 <a class="material-icons">thumb_down </a>
                 </span>
                 <span id={"dislikeNum"+image.id}>{image.dislike_count}</span>    
