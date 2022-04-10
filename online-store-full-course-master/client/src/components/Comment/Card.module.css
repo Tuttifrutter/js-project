@@ -54,3 +54,17 @@
   .activeButton {
     color: red;
   }
+  .Сomment__add{
+    width: 520px;
+    height: 80px;
+    margin-left: 30px;
+    margin-top: -15px;
+  }
+  .Comment__btn{
+    width: 80px;
+    height: 30px;
+    margin-top: -8px;
+    margin-left: 495px;
+    background-color: rgba(16, 3, 3, 0.963);
+    font-size: small;
+  }

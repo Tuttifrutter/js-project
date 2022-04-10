@@ -68,19 +68,19 @@ export const dis_like = async (imageId, userId, meaning) =>{
     document.getElementById("dislikeNum"+imageId).innerHTML=data.dislike_count;
     return data
 }
-
-export function getUserProfile(){
+                            //"myName","myAvatar"
+export function getUserProfile(nameId, avatarId){
     setTimeout(()=>{
-        if(document.getElementById("myName")!=null && document.getElementById("myAvatar")!=0){
-    document.getElementById("myName").innerHTML=localStorage.getItem("userName");
-    document.getElementById("myAvatar").src = process.env.REACT_APP_API_URL+localStorage.getItem("userAvatar");;
+        if(document.getElementById(nameId)!=null && document.getElementById(avatarId)!=0){
+    document.getElementById(nameId).innerHTML=localStorage.getItem("userName");
+    document.getElementById(avatarId).src = process.env.REACT_APP_API_URL+localStorage.getItem("userAvatar");;
     }}, 300)
    
  }
 
  export function getImgNick(id, local){
     setTimeout(()=>{
-        if(document.getElementById("nickName"+id)!=null){
+        if(document.getElementById("nickName"+id)!=null && localStorage.getItem(local+id)!=null){
             const res = localStorage.getItem(local+id).split(" ");
             const nick = res[0].slice(res[0].indexOf("'")+1, res[0].lastIndexOf("'"));
             const img = res[1].slice(res[1].indexOf("'")+1, res[1].lastIndexOf("'"));
@@ -111,4 +111,21 @@ export function dataParse(data){
     }else
         return "wrong time format"
     
+}
+
+export const sendComment = async (imageId, userId) => {
+    var t = document.getElementById("input");
+    let data;
+    if(t.value!="" && t.value!=null && t.value!=undefined ){
+        var text = t.value;
+        if(text.length>=500){
+            alert("Комментарий слишком большой, уложитесь в 500 символов, друг");
+        }else{
+            data = await $authHost.post('api/comment',{imageId, userId, text});
+            t.value = "";
+            window.location.reload();
+        }
+    }else
+        alert("Комментарий пустой, как моя жизнь(((")
+    return data
 }

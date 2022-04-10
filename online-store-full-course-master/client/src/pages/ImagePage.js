@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom'
 import {fetchOneImage, getComments, dataParse} from "../http/imageAPI";
 import {Context} from "../index";
 import CommentList from '../components/CommentList';
+import CommentAddForm from '../components/CommentAddForm';
 import { observer } from 'mobx-react-lite';
 
 const ImagePage  = observer(() => {
@@ -15,6 +16,7 @@ const ImagePage  = observer(() => {
     useEffect(() => {
         fetchOneImage(id).then(data => setImage(data));
         getComments(id).then(data => image.setComments(data));
+        localStorage.setItem("ChoosenImgId",id);
     }, [])
 
     return (
@@ -52,7 +54,9 @@ const ImagePage  = observer(() => {
             </Row>
             <h7>{dataParse(imagel.createdAt)}</h7>
             <Col md={2}>
-            <h2>COMMENTS</h2>       
+            <h2>COMMENTS</h2>   
+                <CommentAddForm/>
+                <h1></h1>   
                     <CommentList/>
             </Col>
         </Container>

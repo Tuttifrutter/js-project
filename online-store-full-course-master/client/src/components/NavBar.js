@@ -77,7 +77,7 @@ const NavBar = observer(() => {
                             Logout
                         </Button>
                         
-                        <Image id="myAvatar" className={styles.Header__userLogo} width='30' height='30'src={getUserProfile()}/>
+                        <Image id="myAvatar" className={styles.Header__userLogo} width='30' height='30'src={getUserProfile("myName","myAvatar")}/>
                             <nav id="myName" className={styles.Header__userName}>{}</nav>
                     </Nav>
                     :
