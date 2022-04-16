@@ -4,7 +4,7 @@ import Image from "react-bootstrap/Image";
 import star from '../assets/star.png'
 import styles from "./Main/Card.module.css"
 import {useHistory} from "react-router-dom"
-import {IMAGE_ROUTE} from "../utils/consts";
+import {IMAGE_ROUTE, USERPAGE_ROUTE} from "../utils/consts";
 import {dis_like} from "../http/imageAPI";
 import { getImgNick } from '../http/imageAPI';
 
@@ -13,8 +13,8 @@ const ImageItem = ({image, user}) => {
     return (
             <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
             <div className={styles.Card}>
-            <div className={styles.Card__header}>
-                <Image id = {"userImg"+image.id} className={styles.Card__userLogo}/>
+            <div className={styles.Card__header} >
+                <Image id = {"userImg"+image.id} className={styles.Card__userLogo} onClick={(event) => {localStorage.setItem("choosenUserId", image.userId);  history.push(USERPAGE_ROUTE + '/' + image.userId)}} />
                 <div clasName={styles.Card_userDate}>
                     <div id = {"nickName"+image.id}className={styles.Card__userName}>{getImgNick(image.id, "imgUserInfo")} </div>
                     <div className={styles.Card__userPosition}>{image.location}</div>
@@ -23,7 +23,7 @@ const ImageItem = ({image, user}) => {
                 . . .
                 </div>
             </div>
-            <Col md={-3} onClick={(event) => {window.open(IMAGE_ROUTE + '/' + image.id)}}>
+            <Col md={-3} onClick={(event) => {history.push(IMAGE_ROUTE + '/' + image.id)}}>
             <div className={styles.Card__content}><Image width={614} height={614} src={process.env.REACT_APP_API_URL + image.img}/></div>
             </Col>
             <div className={styles.Card__communication}>

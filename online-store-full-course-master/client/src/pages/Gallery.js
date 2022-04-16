@@ -15,14 +15,14 @@ const Gallery = observer(() => {
     useEffect(() => {
         fetchFriends().then(data => image.setFriends(data))
         fetchThemes().then(data => image.setThemes(data))
-        fetchImages(null, null, 1, 2).then(data => {
+        fetchImages(null, null, 1, null, 2).then(data => {
             image.setImages(data.rows)
             image.setTotalCount(data.count)
         })
     }, [])
 
     useEffect(() => {
-        fetchImages(image.selectedFriend.id, image.selectedTheme.id, image.page, 2).then(data => {
+        fetchImages(image.selectedFriend.id, image.selectedTheme.id, image.page,null, 2).then(data => {
             image.setImages(data.rows)
             image.setTotalCount(data.count)
         })

@@ -8,6 +8,7 @@ export default class ImageStore {
         this._comments =[]
         this._selectedFriend = {}
         this._selectedTheme = {}
+        this._userInfo ={}
         this._page = 1
         this._totalCount = 0
         this._limit = 3
@@ -43,6 +44,10 @@ export default class ImageStore {
         this._totalCount = count
     }
 
+    setUserInfo(info){
+        this._userInfo = info
+    }
+
     get comments(){
         return this._comments
     }
@@ -69,6 +74,9 @@ export default class ImageStore {
     }
     get limit() {
         return this._limit
+    }
+    get getUserInfo(){
+        return this._userInfo 
     }
 
 }

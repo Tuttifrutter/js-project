@@ -27,9 +27,9 @@ export const createImage = async (image) => {
     return data
 }
 
-export const fetchImages = async (friendId, themeId, page, limit= 5) => {
+export const fetchImages = async (friendId, themeId, page, userId=null, limit= 5) => {
     const {data} = await $authHost.get('api/image', {params: {
-        friendId, themeId, page, limit
+        friendId, themeId, page, limit, userId
         }})
     return data
 }
@@ -68,7 +68,7 @@ export const dis_like = async (imageId, userId, meaning) =>{
     document.getElementById("dislikeNum"+imageId).innerHTML=data.dislike_count;
     return data
 }
-                            //"myName","myAvatar"
+
 export function getUserProfile(nameId, avatarId){
     setTimeout(()=>{
         if(document.getElementById(nameId)!=null && document.getElementById(avatarId)!=0){
@@ -121,11 +121,10 @@ export const sendComment = async (imageId, userId) => {
         if(text.length>=500){
             alert("Комментарий слишком большой, уложитесь в 500 символов, друг");
         }else{
-            data = await $authHost.post('api/comment',{imageId, userId, text});
+            data = await $authHost.post('api/comment',{imageId, userId, text}).then(result => alert("Комментарий: '"+result.data.text+"' добавлен"));
             t.value = "";
             window.location.reload();
         }
     }else
-        alert("Комментарий пустой, как моя жизнь(((")
-    return data
+        alert("Комментарий пустой, как моя жизнь(((");
 }

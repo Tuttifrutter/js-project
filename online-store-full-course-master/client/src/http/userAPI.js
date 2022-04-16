@@ -29,3 +29,8 @@ export const userInfo = async (userId) => {
      const res = "nick='"+data.nick_name+"' img='"+data.img+"'";
      return res
 }
+
+export const getUserInfo = async (userId) => {
+    const {data} = await $host.post('api/user/userinfo', {userId})
+    return data
+}

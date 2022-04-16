@@ -21,25 +21,47 @@ class ImageController {
 
     async getAll(req, res, next) {
         try {
-        let {themeId, friendId, limit, page} = req.query
-        console.log("themeid = ",themeId,", friendid = ", friendId,", limit = ", limit,", page = ", page)
+        let {themeId, friendId, limit, page, userId} = req.query
+        console.log("themeid = ",themeId,", friendid = ", friendId,", limit = ", limit,", page = ", page, ", userId = ", userId)
         page = page || 1
         limit = limit || 9
         let offset = page * limit - limit
         let images;
-        if (!themeId && !friendId) {
-            images = await Image.findAndCountAll({limit, offset})
-        }
-        if (themeId && !friendId) {
-            images = await Image.findAndCountAll({where:{themeId}, limit, offset})
-        }
-        if (!themeId && friendId) {
-            images = await Image.findAndCountAll({where:{friendId}, limit, offset})
-        }
-        if (themeId && friendId) {
-            images = await Image.findAndCountAll({where:{friendId, themeId}, limit, offset})
-        }
-        return res.json(images)
+            if (!themeId && !friendId && !userId) {
+                images = await Image.findAndCountAll({limit, offset})
+                return res.json(images) // all undefined
+            }
+
+            if (themeId && !friendId && !userId) {
+                images = await Image.findAndCountAll({where:{themeId}, limit, offset})
+                return res.json(images) // themeId has value, others not
+            }
+            if (!themeId && friendId && !userId) {
+                images = await Image.findAndCountAll({where:{friendId}, limit, offset})
+                return res.json(images) // friendId has value, others not
+            }
+            if (!themeId && !friendId && userId) {
+                images = await Image.findAndCountAll({where:{userId}, limit, offset})
+                return res.json(images) // userId has value, others not
+            }
+
+            if (themeId && !friendId && userId) {
+                images = await Image.findAndCountAll({where:{themeId, userId}, limit, offset})
+                return res.json(images) //themeId, userId have values, friendId not
+            }
+            if (!themeId && friendId && userId) {
+                images = await Image.findAndCountAll({where:{friendId, userId}, limit, offset})
+                return res.json(images) //friendId, userId have values, themeId not
+            }
+            if (themeId && friendId && !userId) {
+                images = await Image.findAndCountAll({where:{friendId, themeId}, limit, offset})
+                return res.json(images) //friendId, themeId have values, userId not
+            }
+
+            if (themeId && friendId && userId) {
+                images = await Image.findAndCountAll({where:{friendId, themeId, userId}, limit, offset})
+                return res.json(images) //everyone has value
+            }
         }catch(e){
             next(ApiError.badRequest(e.message))
         }

@@ -12,18 +12,20 @@ import {getUserProfile} from "../http/imageAPI";
 import Image from "react-bootstrap/Image";
 import styles from './Header/Header.module.css' 
 import st from './iconfont/material-icons.css'
+import { USERPAGE_ROUTE } from '../utils/consts';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
-
+    const userId = localStorage.getItem('userId');
     const logOut = () => {
         user.setUser({})
         user.setIsAuth(false)
         localStorage.removeItem('token');
         localStorage.removeItem('userName');
-        localStorage.removeItem('userId')
-        localStorage.removeItem('userAvatar')
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userAvatar');
+        localStorage.removeItem("choosenUserId");
     }
 
     return (
@@ -40,7 +42,7 @@ const NavBar = observer(() => {
         
             <div className={styles.Header__wrapper}>
                 <div className={styles.Header__item}>
-                    <span class="material-icons">
+                    <span class="material-icons" onClick={localStorage.removeItem("choosenUserId")}>
                         <NavLink to={GALLERY_ROUTE}>home</NavLink>
                     </span>
                 </div> 
@@ -77,7 +79,7 @@ const NavBar = observer(() => {
                             Logout
                         </Button>
                         
-                        <Image id="myAvatar" className={styles.Header__userLogo} width='30' height='30'src={getUserProfile("myName","myAvatar")}/>
+                        <Image id="myAvatar" className={styles.Header__userLogo} width='30' height='30'src={getUserProfile("myName","myAvatar")} onClick={(event) => {localStorage.setItem("choosenUserId", userId);  history.push(USERPAGE_ROUTE + '/' + userId)}}/>
                             <nav id="myName" className={styles.Header__userName}>{}</nav>
                     </Nav>
                     :
