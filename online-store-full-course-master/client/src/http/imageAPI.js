@@ -69,6 +69,12 @@ export const dis_like = async (imageId, userId, meaning) =>{
     return data
 }
 
+export const getLikeList = async (userId) => {
+    const {data} = await $authHost.get('api/dis_like/', {params:{userId}})
+    console.log(data);
+    return data
+}
+
 export function getUserProfile(nameId, avatarId){
     setTimeout(()=>{
         if(document.getElementById(nameId)!=null && document.getElementById(avatarId)!=0){

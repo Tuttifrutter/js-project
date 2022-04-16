@@ -3,7 +3,7 @@ import {Context} from "../index";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {NavLink} from "react-router-dom";
-import {ADMIN_ROUTE, LOGIN_ROUTE, GALLERY_ROUTE} from "../utils/consts";
+import {ADMIN_ROUTE, LOGIN_ROUTE, GALLERY_ROUTE, USERPAGE_ROUTE, FAVOURITE_ROUTE} from "../utils/consts";
 import {Button} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import Container from "react-bootstrap/Container";
@@ -12,7 +12,6 @@ import {getUserProfile} from "../http/imageAPI";
 import Image from "react-bootstrap/Image";
 import styles from './Header/Header.module.css' 
 import st from './iconfont/material-icons.css'
-import { USERPAGE_ROUTE } from '../utils/consts';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
@@ -58,7 +57,7 @@ const NavBar = observer(() => {
                 </div> 
                 <div className={styles.Header__item}>
                     <span class="material-icons">
-                        favorite
+                    <NavLink to={FAVOURITE_ROUTE}>favorite</NavLink> 
                     </span>    
                 </div> 
                 <div className={styles.Header__item}></div> 

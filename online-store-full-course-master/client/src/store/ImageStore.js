@@ -28,7 +28,12 @@ export default class ImageStore {
     setImages(images) {
         this._images = images
     }
-
+    addImage(image){
+        this._images.push(image);
+    }
+    clearImages(){
+        this._images=[];
+    }
     setSelectedFriend(friend) {
         this.setPage(1)
         this._selectedFriend = friend

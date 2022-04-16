@@ -67,6 +67,16 @@ class Dis_LikeController{
             return res.json(dis_like)  //Изменяем запись в бд   //выходим
         }
     }
+
+    async get(req, res){
+        const {userId} = req.query
+        const meaning = "1"; let imgListId; let imgIds =[];
+            imgListId = await LikeDislike.findAll({where:{userId, meaning}});
+            for(let i=0; i<imgListId.length; i++){
+                imgIds.push(imgListId[i].imageId);
+            }
+        return res.json(imgIds);
+    }
 }
 
 module.exports = new Dis_LikeController()
