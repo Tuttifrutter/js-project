@@ -27,19 +27,22 @@ const Auth = observer(() => {
             let userdata;
             if (isLogin) {
                 data = await login(email, password);
-                userdata = await info(email);
+                userdata = await info(email).then(userdata=>{                                   
+                    localStorage.setItem('userId', userdata.userinfo.id);
+                    localStorage.setItem('userName', userdata.userinfo.nick_name);
+                    localStorage.setItem('userAvatar',userdata.userinfo.img);
+                });
             } else {
                 data = await registration(email, password, first_name, second_name, nick_name, birthday);
-                userdata = await info(email);
+                userdata = await info(email).then(userdata=>{                                   
+                    localStorage.setItem('userId', userdata.userinfo.id);
+                    localStorage.setItem('userName', userdata.userinfo.nick_name);
+                    localStorage.setItem('userAvatar',userdata.userinfo.img);
+                });
             }
             user.setUser(user)
             user.setIsAuth(true)
-            if(userdata){
-                localStorage.setItem('userId', userdata.userinfo.id);
-                localStorage.setItem('userName', userdata.userinfo.nick_name);
-                localStorage.setItem('userAvatar',userdata.userinfo.img);
-            }
-            history.push(GALLERY_ROUTE)
+                history.push(GALLERY_ROUTE)
         } catch (e) {
             alert(e.response.data.message);
             console.error(e.response.data.message);
