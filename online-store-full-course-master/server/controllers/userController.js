@@ -76,6 +76,8 @@ class UserController {
                     nick_name : user.nick_name,
                     first_name : user.first_name,
                     second_name : user.second_name,
+                    status : user.status,
+                    birthday: user.birthday,
                     email: user.email,
                     img: user.img};
         return res.json(userinfo)
