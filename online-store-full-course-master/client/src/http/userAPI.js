@@ -50,8 +50,23 @@ export const getSubscribersId= async (subuserId) => {
     return data
 }
 
-export const SubscribeOrNot= async (userId, subuserId) => {
+export const subscribeOrNot= async (userId, subuserId) => {
     const {data} = await $authHost.get('api/subscribe/ornot', {params:{userId, subuserId}})      //получаем true если user подписан на subuser
     return data
 }
 
+export const subButton = async (value) =>{ 
+    let res;
+    if(value == "*"){
+        res = "Изменить"
+    }else if(value == true){
+        res = "Вы подписаны"
+    }else if(value == false){
+        res = "Подписаться"
+    }else{
+        res = "Опачки"
+    }
+
+    document.getElementById("subbtn").innerHTML=res;
+    return res
+}

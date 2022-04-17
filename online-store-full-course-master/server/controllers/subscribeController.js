@@ -16,7 +16,7 @@ class SubscribeController{
         )
         if(!likeNode){
             const newNode = await Subscribe.create({userId, subuserId})// Создаем новую запись
-            return res.json(newNode)
+            return res.json(true)
         }
 
         if(likeNode){ //если в таблице уже есть подписка
@@ -26,7 +26,7 @@ class SubscribeController{
                 }
             ).then(task => {task.destroy()
             })
-              return res.json(delNode);//выходим
+              return res.json(false)
         }
     }
 

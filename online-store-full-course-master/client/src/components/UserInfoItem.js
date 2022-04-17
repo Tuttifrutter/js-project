@@ -3,13 +3,12 @@ import {Button, Card, Col} from "react-bootstrap";
 import {useHistory} from "react-router-dom"
 import styles from "./UserInfo/Card.module.css"
 import { Image } from 'react-bootstrap';
-//import {dis_like} from "../http/imageAPI";
-//getImgNick(comment.id, "comUserInfo")
-//dataParse(comment.createdAt)
 import { getImgNick, dataParse } from '../http/imageAPI';
+import { subButton, subscribe } from '../http/userAPI';
 
 const UserInfoItem = ({user}) => {
     const history = useHistory()
+    const myuserId = localStorage.getItem("userId")
     return (  
             <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
             <div className={styles.Card}>
@@ -22,7 +21,8 @@ const UserInfoItem = ({user}) => {
                 </div>
                 <div className={styles.Card__communication}>
                 <div>{user.email}</div>
-                <div><Button className={styles.Subscribe__btn}>Подписаться</Button></div>
+                <div><Button id = {"subbtn"} className={styles.Subscribe__btn} onClick={()=>subscribe(myuserId, user.id).then(data=>subButton(data))}>button</Button></div>
+                   
             </div>
             <div className={styles.Card__status}>{"Статус: "+ user.status}</div>
             </div>

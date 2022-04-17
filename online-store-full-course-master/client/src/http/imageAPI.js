@@ -71,7 +71,6 @@ export const dis_like = async (imageId, userId, meaning) =>{
 
 export const getLikeList = async (userId) => {
     const {data} = await $authHost.get('api/dis_like/', {params:{userId}})
-    console.log(data);
     return data
 }
 
