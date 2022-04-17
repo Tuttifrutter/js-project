@@ -46,12 +46,12 @@ export const getSubscribesId= async (userId) => {
 }
 
 export const getSubscribersId= async (subuserId) => {
-    const {data} = await $authHost.get('api/subscribe/', {params:{subuserId}})      //получение списка id юзеров которые подписаны на пользователя
+    const {data} = await $authHost.get('api/subscribe/rs', {params:{subuserId}})      //получение списка id юзеров которые подписаны на пользователя
     return data
 }
 
 export const SubscribeOrNot= async (userId, subuserId) => {
-    const {data} = await $authHost.get('api/subscribe/', {params:{userId, subuserId}})      //получаем true если user подписан на subuser
+    const {data} = await $authHost.get('api/subscribe/ornot', {params:{userId, subuserId}})      //получаем true если user подписан на subuser
     return data
 }
 

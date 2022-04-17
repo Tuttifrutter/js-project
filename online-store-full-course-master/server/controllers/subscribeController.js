@@ -39,6 +39,27 @@ class SubscribeController{
             }
         return res.json(subIds);
     }
+
+    async getrs(req, res){
+        const {subuserId} = req.query
+         let subListId; let subIds =[];
+            subListId = await Subscribe.findAll({where:{subuserId}});
+            for(let i=0; i<subListId.length; i++){
+                subIds.push(subListId[i].userId);
+            }
+        return res.json(subIds);
+    }
+
+    async getornot(req, res){
+        const {userId, subuserId} = req.query
+         let sub = await Subscribe.findOne({where:{userId, subuserId}});
+         if(sub){
+            return res.json(true);
+         } else {
+            return res.json(false);
+         }
+            
+    }
 }
 
 module.exports = new SubscribeController()
