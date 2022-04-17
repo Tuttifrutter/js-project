@@ -34,3 +34,24 @@ export const getUserInfo = async (userId) => {
     const {data} = await $host.post('api/user/userinfo', {userId})
     return data
 }
+
+export const subscribe = async(userId, subuserId)=>{
+    const {data} = await $host.post('api/subscribe', {userId, subuserId})    // подписка
+    return data
+}
+
+export const getSubscribesId= async (userId) => {
+    const {data} = await $authHost.get('api/subscribe/', {params:{userId}})      //получение списка id юзеров на которые подписан пользователь
+    return data
+}
+
+export const getSubscribersId= async (subuserId) => {
+    const {data} = await $authHost.get('api/subscribe/', {params:{subuserId}})      //получение списка id юзеров которые подписаны на пользователя
+    return data
+}
+
+export const SubscribeOrNot= async (userId, subuserId) => {
+    const {data} = await $authHost.get('api/subscribe/', {params:{userId, subuserId}})      //получаем true если user подписан на subuser
+    return data
+}
+
