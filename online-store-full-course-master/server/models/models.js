@@ -10,7 +10,8 @@ const User = sequelize.define('user', {
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING},
     role: {type: DataTypes.STRING, defaultValue: "USER"},
-    img:{type: DataTypes.STRING(1000)}
+    img:{type: DataTypes.STRING(1000)},
+    status: {type: DataTypes.STRING(100)}
 })
 
 const Image = sequelize.define('image', {
@@ -45,7 +46,7 @@ const FriendTheme = sequelize.define('friend_theme', {
 
 const LikeDislike = sequelize.define('like_dislike', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-    meaning: {type: DataTypes.STRING}, // true -like , false - dislike
+    meaning: {type: DataTypes.STRING}, // 1 -like , 0 - dislike
 })
 
 const Comment = sequelize.define('comments', {
@@ -53,8 +54,15 @@ const Comment = sequelize.define('comments', {
     text: {type: DataTypes.STRING(1000)}
 })
 
+const Subscribe = sequelize.define('subscribe', {
+    subuserId : {type: DataTypes.INTEGER}
+})
+
 User.hasMany(LikeDislike)
 LikeDislike.belongsTo(User)
+
+User.hasMany(Subscribe)
+Subscribe.belongsTo(User)
 
 User.hasMany(Image)
 Image.belongsTo(User)
@@ -87,6 +95,7 @@ module.exports = {
     Comment,
     Friend,
     Theme,
+    Subscribe,
     FriendTheme,
     ImageInfo
 }
