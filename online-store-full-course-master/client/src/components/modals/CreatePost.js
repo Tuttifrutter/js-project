@@ -28,7 +28,8 @@ const CreateImage = observer(({show, onHide}) => {
         formData.append('location', location)
         formData.append('text', text)
         formData.append('themeId', image.selectedTheme.id)
-        formData.append('friendId', image.selectedFriend.id)
+        formData.append('friendId', localStorage.getItem("userId"))
+        formData.append('userId', localStorage.getItem("userId"))
         createImage(formData).then(data => onHide())
     }
 
@@ -45,19 +46,6 @@ const CreateImage = observer(({show, onHide}) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle>{image.selectedFriend.name || "Выберите друга"}</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {image.friends.map(friend =>
-                                <Dropdown.Item
-                                    onClick={() => image.setSelectedFriend(friend)}
-                                    key={friend.id}
-                                >
-                                    {friend.name}
-                                </Dropdown.Item>
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown>
                     <Dropdown className="mt-2 mb-2">
                         <Dropdown.Toggle>{image.selectedTheme.name || "Выберите тему"}</Dropdown.Toggle>
                         <Dropdown.Menu>

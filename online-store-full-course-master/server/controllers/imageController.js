@@ -6,11 +6,11 @@ const ApiError = require('../error/ApiError');
 class ImageController {
     async create(req, res, next) {
         try {
-            let {name, text, location, themeId, friendId} = req.body
+            let {name, text, location, themeId, friendId, userId} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
-            const image = await Image.create({name, text, location, themeId, friendId, img: fileName});
+            const image = await Image.create({name, text, location, themeId, friendId,userId, img: fileName});
 
             return res.json(image)
         } catch (e) {
