@@ -13,7 +13,7 @@ import { getUserInfo, subscribeOrNot, subButton } from '../http/userAPI';
 
 const UserPage = observer(() => {
     const {image} = useContext(Context)
-
+    let user = image.getUserInfo
     useEffect(() => {
         const userId = localStorage.getItem("choosenUserId");
         fetchThemes().then(data => image.setThemes(data))
@@ -22,6 +22,7 @@ const UserPage = observer(() => {
             image.setImages(data.rows)
             image.setTotalCount(data.count)
         })
+        user = image.getUserInfo;
         const authId = localStorage.getItem("userId");
         if(authId != userId){
             subscribeOrNot(authId, userId).then(data=>{subButton(data)});
@@ -46,7 +47,7 @@ const UserPage = observer(() => {
         <Container>
             <Row className="mt-3">
                 <Col md={2}>
-                    <UserInfoItem user ={image.getUserInfo}/>
+                    <UserInfoItem user ={user}/>
                     <ThemeBar/>
                     <ImageList/>
                     <Pages/>

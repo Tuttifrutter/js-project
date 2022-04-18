@@ -40,9 +40,8 @@ export const subscribe = async(userId, subuserId)=>{
     return data
 }
 
-export const getSubscribesId= async (userId) => {
-    const {data} = await $authHost.get('api/subscribe/', {params:{userId}})      //получение списка id юзеров на которые подписан пользователь
-    return data
+export const getSubscribesName= async (userId) => {
+    return await $authHost.get('api/subscribe/', {params:{userId}})      //получение списка юзеров на которые подписан пользователь
 }
 
 export const getSubscribersId= async (subuserId) => {

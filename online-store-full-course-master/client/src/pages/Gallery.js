@@ -7,13 +7,14 @@ import ThemeBar from "../components/ThemeBar";
 import ImageList from "../components/ImageList";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {fetchThemes, fetchImages, fetchFriends} from "../http/imageAPI";
+import {fetchThemes, fetchImages} from "../http/imageAPI";
+import {getSubscribesName} from "../http/userAPI";
 import Pages from "../components/Pages";
 
 const Gallery = observer(() => {
     const {image} = useContext(Context)
     useEffect(() => {
-        fetchFriends().then(data => image.setFriends(data))
+        getSubscribesName(localStorage.getItem("userId")).then(data => image.setFriends(data.data));
         fetchThemes().then(data => image.setThemes(data))
         fetchImages(null, null, 1, null, 2).then(data => {
             image.setImages(data.rows)
@@ -22,6 +23,7 @@ const Gallery = observer(() => {
     }, [])
 
     useEffect(() => {
+        console.log(image.selectedFriend.id);
         fetchImages(image.selectedFriend.id, image.selectedTheme.id, image.page,null, 2).then(data => {
             image.setImages(data.rows)
             image.setTotalCount(data.count)
