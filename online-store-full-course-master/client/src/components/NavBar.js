@@ -41,7 +41,7 @@ const NavBar = observer(() => {
         
             <div className={styles.Header__wrapper}>
                 <div className={styles.Header__item}>
-                    <span class="material-icons" onClick={localStorage.removeItem("choosenUserId")}>
+                    <span class="material-icons" onClick={()=>localStorage.removeItem("choosenUserId")}>
                         <NavLink to={GALLERY_ROUTE}>home</NavLink>
                     </span>
                 </div> 
