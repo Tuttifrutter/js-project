@@ -24,7 +24,7 @@ const UserInfoItem = ({user}) => {
                 <div><Button id = {"subbtn"} className={styles.Subscribe__btn} onClick={()=>subscribe(myuserId, user.id).then(data=>subButton(data))}>button</Button></div>
                    
             </div>
-            <div className={styles.Card__status}>{"Статус: "+ user.status}</div>
+            <div className={styles.Card__status}>{user.status=="online"? user.status : "заходил "+ dataParse(user.status, false)}</div>
             </div>
             </div>
         </div>

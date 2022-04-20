@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
-import bigStar from '../assets/bigStar.png'
+import handUp from '../assets/handup.png'
+import handDown from '../assets/handdown.png'
 import {useParams} from 'react-router-dom'
 import {fetchOneImage, getComments, dataParse} from "../http/imageAPI";
 import {Context} from "../index";
@@ -30,9 +31,9 @@ const ImagePage  = observer(() => {
                         <h2>LIKE</h2>
                         <div
                             className="d-flex align-items-center justify-content-center"
-                            style={{background: `url(${bigStar}) no-repeat center center`, width:96, height: 96, backgroundSize: 'cover', fontSize:64}}
-                        >
-                            {imagel.like_count}
+                            style={{background: `url(${handUp}) no-repeat center center`, width:150, height: 150, backgroundSize: 'cover', fontSize:56, color: 'black'}}
+                        ><div style = {{marginTop: 30, marginLeft: 30}}>{imagel.like_count}</div>
+                            
                         </div>
                     </Row>
                 </Col>
@@ -41,9 +42,9 @@ const ImagePage  = observer(() => {
                         <h2>DISLIKE</h2>
                         <div
                             className="d-flex align-items-center justify-content-center"
-                            style={{background: `url(${bigStar}) no-repeat center center`, width:96, height: 96, backgroundSize: 'cover', fontSize:64}}
+                            style={{background: `url(${handDown}) no-repeat center center`, width:150, height: 150, backgroundSize: 'cover', fontSize:56, color: 'black'}}
                         >
-                            {imagel.dislike_count}
+                           <div style = {{marginBottom: 50, marginRight: 30}}> {imagel.dislike_count}</div>
                         </div>
                     </Row>
                     <h1></h1>

@@ -69,3 +69,9 @@ export const subButton = async (value) =>{
     document.getElementById("subbtn").innerHTML=res;
     return res
 }
+
+export const setStatus= async (userId, value) =>{
+    localStorage.setItem('status', value);
+    const {data} = await $host.post('api/user/status', {userId, value}) 
+    return data
+}

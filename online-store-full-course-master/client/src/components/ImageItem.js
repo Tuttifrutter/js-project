@@ -38,11 +38,13 @@ const ImageItem = ({image, user}) => {
                 <a class="material-icons">thumb_down </a>
                 </span>
                 <span id={"dislikeNum"+image.id}>{image.dislike_count}</span>    
-                  
-                <span class="material-icons" onClick={(event) => {history.push(IMAGE_ROUTE + '/' + image.id)}}>
+
+                <span onClick={(event) => {history.push(IMAGE_ROUTE + '/' + image.id)}}>
+                <span class="material-icons">
                     comment
                 </span>
                 <span>{image.comment_count}</span> 
+                </span>  
                 <div>{image.text}</div>
             </div>
         </div>

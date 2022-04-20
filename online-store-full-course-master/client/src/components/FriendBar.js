@@ -12,7 +12,13 @@ const FriendBar = observer(() => {
                 <ListGroup.Item
                     style={{cursor: 'pointer'}}
                     active={friend.id === image.selectedFriend.id}
-                    onClick={() => image.setSelectedFriend(friend)}
+                    onClick={ ()=>{
+                        if(image.selectedFriend.id == undefined || image.selectedFriend.id != friend.id){
+                            image.setSelectedFriend(friend);
+                        } else if(image.selectedFriend.id === friend.id){
+                            image.setSelectedFriend("*");
+                        }}
+                    }
                     key={friend.id}
                 >
                     {friend.name}

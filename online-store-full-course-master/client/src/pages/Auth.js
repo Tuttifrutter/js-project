@@ -1,13 +1,13 @@
-import React, {useContext, useState} from 'react';
-import {Container, Form} from "react-bootstrap";
-import Card from "react-bootstrap/Card";
+import { observer } from "mobx-react-lite";
+import React, { useContext, useState } from 'react';
+import { Container, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
-import {NavLink, useLocation, useHistory} from "react-router-dom";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, GALLERY_ROUTE} from "../utils/consts";
-import {login, registration, info} from "../http/userAPI";
-import {observer} from "mobx-react-lite";
-import {Context} from "../index";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { info, login, registration, setStatus } from "../http/userAPI";
+import { Context } from "../index";
+import { GALLERY_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -31,6 +31,7 @@ const Auth = observer(() => {
                     localStorage.setItem('userId', userdata.userinfo.id);
                     localStorage.setItem('userName', userdata.userinfo.nick_name);
                     localStorage.setItem('userAvatar',userdata.userinfo.img);
+                    setStatus(userdata.userinfo.id, "online")
                 });
             } else {
                 data = await registration(email, password, first_name, second_name, nick_name, birthday);
@@ -38,6 +39,7 @@ const Auth = observer(() => {
                     localStorage.setItem('userId', userdata.userinfo.id);
                     localStorage.setItem('userName', userdata.userinfo.nick_name);
                     localStorage.setItem('userAvatar',userdata.userinfo.img);
+                    setStatus(userdata.userinfo.id, "online")
                 });
             }
             user.setUser(user)

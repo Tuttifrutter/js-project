@@ -83,6 +83,16 @@ class UserController {
         return res.json(userinfo)
     }
 
+    async setStatus(req, res, next) {
+        const {userId, value} = req.body
+        const id = userId;
+        const user = await User.findOne({where: {id}}).then(user => user.update({ status: value }))
+        if (!user) {
+            return next(ApiError.internal('Пользователь не найден'))
+        }
+        return res.json(user)
+    }
+
     async check(req, res, next) {
         const token = generateJwt(req.user.id, req.user.email, req.user.role)
         return res.json({token})

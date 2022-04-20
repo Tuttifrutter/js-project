@@ -8,7 +8,8 @@ import {Button} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import Container from "react-bootstrap/Container";
 import {useHistory} from 'react-router-dom'
-import {getUserProfile} from "../http/imageAPI";
+import {getUserProfile, getCurrentDateAndTime} from "../http/imageAPI";
+import { setStatus } from '../http/userAPI';
 import Image from "react-bootstrap/Image";
 import styles from './Header/Header.module.css' 
 import st from './iconfont/material-icons.css'
@@ -23,6 +24,7 @@ const NavBar = observer(() => {
         user.setIsAuth(false)
         localStorage.removeItem('token');
         localStorage.removeItem('userName');
+        setStatus(localStorage.getItem('userId'), getCurrentDateAndTime())
         localStorage.removeItem('userId');
         localStorage.removeItem('userAvatar');
         localStorage.removeItem("choosenUserId");
