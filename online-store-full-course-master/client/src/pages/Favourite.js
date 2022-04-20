@@ -16,7 +16,7 @@ const Favourite = observer(() => {
         let imgList=[];
         image.clearImages();
         getLikeList(userId).then(data =>{
-            for(let i=0; i<data.length; i++){
+            for(let i=data.length-1; i>=0; i--){
                 fetchOneImage(data[i]).then(result => {image.addImage(result)})
             }
             
