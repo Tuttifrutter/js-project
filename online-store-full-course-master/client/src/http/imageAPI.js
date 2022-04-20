@@ -102,20 +102,56 @@ export function getUserProfile(nameId, avatarId){
 export function dataParse(data){
     let dt;
     if(data!=null && data!=undefined){
-    dt = data.split("T");
-    const date = dt[0]; 
-    const time = dt[1]; 
-    const ymd =date.split("-");
-    const y = ymd[0];
-    const m = ymd[1];
-    const d = ymd[2];
-    const hm = time.split(":");
-    const h = (parseInt(hm[0])+3).toString();
-    const min = hm[1]; 
-    return d+"/"+m+"/"+y+" "+h+":"+min;
+        dt = data.split("T");
+        const months =["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+        const date = dt[0]; 
+        const time = dt[1]; 
+        const ymd =date.split("-");
+        const y = ymd[0];
+        const m = ymd[1];
+        const d = ymd[2];
+        const hm = time.split(":");
+        const h = (parseInt(hm[0])+3).toString();
+        const min = hm[1]; 
+        if(getCurrentTime()==h+":"+min && getCurrentDate()==d+"/"+m+"/"+y)
+        {
+            return "только что";
+        }
+        if(getCurrentDate()==d+"/"+m+"/"+y){
+            return "сегодня в "+h+":"+min;
+        }
+        let arr=getCurrentDate().split("/");
+        if(arr[1]==m && arr[2]==y && arr[0]!=d){
+            if(parseInt(arr[0])-1 == parseInt(d)){
+                return "вчера в "+ h+":"+min;
+            } else {
+                return parseInt(d)+" "+months[parseInt(m)-1]+" "+h+":"+min;
+            }
+        } else if(arr[1]!=m && arr[2]==y && arr[0]!=d){
+            return d+" "+months[parseInt(m)-1]+" "+h+":"+min;
+        } else{
+            return d+" "+months[parseInt(m)-1]+"/"+y+" "+h+":"+min;
+        }
     }else
         return "wrong time format"
     
+}
+
+export function getCurrentDate(separator="/"){
+
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+    
+    return `${date}${separator}${month<10?`0${month}`:`${month}`}${separator}${year}`
+}
+
+export function getCurrentTime(separator=":"){
+    let newTime = new Date()
+    let minutes = newTime.getMinutes();
+    let hours = newTime.getHours();
+    return hours+separator+minutes;
 }
 
 export const sendComment = async (imageId, userId) => {
