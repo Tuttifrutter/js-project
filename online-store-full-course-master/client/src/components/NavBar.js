@@ -12,6 +12,7 @@ import {getUserProfile} from "../http/imageAPI";
 import Image from "react-bootstrap/Image";
 import styles from './Header/Header.module.css' 
 import st from './iconfont/material-icons.css'
+import { Dropdown } from 'react-bootstrap';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
@@ -32,12 +33,16 @@ const NavBar = observer(() => {
             
             <Container>
             <nav className={styles.Header__logo}>PhotoApp</nav>
-            <div >
+            <span>
             <input type="text" placeholder="Поиск" className={styles.Header__search}/>
-            <Button className='ml-2' variant={"dark"}>
-                Find
-            </Button>
-            </div>
+            <span className={"ml-2"}>
+                    <span class="material-icons" >
+                        search
+                    </span>    
+                </span> 
+            </span>
+
+
         
             <div className={styles.Header__wrapper}>
                 <div className={styles.Header__item}>
@@ -64,22 +69,21 @@ const NavBar = observer(() => {
                 
                 {user.isAuth ?
                     <Nav className="ml-auto">
-                        <Button
-                            variant={"dark"}
-                            onClick={() => history.push(ADMIN_ROUTE)}
-                        >
-                            Add
-                        </Button>
-                        <Button
-                            variant={"dark"}
-                            onClick={() => logOut()}
-                            className="ml-2"
-                        >
-                            Logout
-                        </Button>
                         
                         <Image id="myAvatar" className={styles.Header__userLogo} width='30' height='30'src={getUserProfile("myName","myAvatar")} onClick={(event) => {localStorage.setItem("choosenUserId", userId);  history.push(USERPAGE_ROUTE + '/' + userId)}}/>
-                            <nav id="myName" className={styles.Header__userName}>{}</nav>
+                        <nav id="myName" className={styles.Header__userName} >{}</nav>
+                            <Dropdown>
+                                <Dropdown.Toggle className={styles.Header__dropDown}></Dropdown.Toggle>
+                                <Dropdown.Menu >
+                                        <Dropdown.Item
+                                            key={"1"} variant={"dark"} onClick={() => history.push(ADMIN_ROUTE)}>
+                                             Add 
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                            key={"2"} variant={"dark"} onClick={() => logOut()}> Logout
+                                        </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                     </Nav>
                     :
                     <Nav className="ml-auto" style={{color: 'white'}}>

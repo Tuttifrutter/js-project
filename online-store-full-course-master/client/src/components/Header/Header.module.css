@@ -47,4 +47,7 @@
     font-weight: 700;
     margin: 5px 5px 0px 10px;
   }
-  
+  .Header__dropDown{
+    background-color: whitesmoke;
+    color: black;
+  }
