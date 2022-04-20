@@ -1,4 +1,4 @@
-const {Comment} = require('../models/models')
+const {Comment, Image} = require('../models/models')
 const ApiError = require('../error/ApiError');
 
 class CommentController{
@@ -8,7 +8,18 @@ class CommentController{
             return res.json(ApiError.badRequest('Не заданы все параметры'))
         }
         const newComment = await Comment.create({imageId, userId, text})// Создаем новую запись
+        await Image.increment({comment_count:1},{where:{id:imageId}});
         return res.json(newComment)
+    }
+
+    async delete(req, res){
+        const {id, imageId} = req.body
+        if(!id || !imageId){
+            return res.json(ApiError.badRequest('Не заданы все параметры'))
+        }
+        const delNode = await Comment.findOne({where:{id}}).then(task => {task.destroy()})
+        await Image.decrement({comment_count:1},{where:{id:imageId}});
+        return res.json(delNode)
     }
 
     async getAll(req, res){

@@ -39,10 +39,10 @@ const ImageItem = ({image, user}) => {
                 </span>
                 <span id={"dislikeNum"+image.id}>{image.dislike_count}</span>    
                   
-                <span class="material-icons">
-                    send
+                <span class="material-icons" onClick={(event) => {history.push(IMAGE_ROUTE + '/' + image.id)}}>
+                    comment
                 </span>
-                <span>0</span> 
+                <span>{image.comment_count}</span> 
                 <div>{image.text}</div>
             </div>
         </div>

@@ -51,11 +51,6 @@ const NavBar = observer(() => {
                     </span>
                 </div> 
                 <div className={styles.Header__item}>
-                    <span class="material-icons" >
-                        send
-                    </span>    
-                </div> 
-                <div className={styles.Header__item}>
                     <span class="material-icons">
                         explore
                     </span>

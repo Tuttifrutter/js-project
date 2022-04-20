@@ -19,6 +19,7 @@ const Image = sequelize.define('image', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     like_count:{type:DataTypes.INTEGER, defaultValue: 0},
     dislike_count:{type:DataTypes.INTEGER, defaultValue: 0}, 
+    comment_count:{type:DataTypes.INTEGER, defaultValue: 0},
     text: {type: DataTypes.STRING(1000)},
     location:{type: DataTypes.STRING, allowNull: false},
     img:{type: DataTypes.STRING, allowNull: false}
