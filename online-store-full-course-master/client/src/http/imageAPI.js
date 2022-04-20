@@ -109,10 +109,16 @@ export function dataParse(data){
         const ymd =date.split("-");
         const y = ymd[0];
         const m = ymd[1];
-        const d = ymd[2];
+        let d = ymd[2];
         const hm = time.split(":");
-        const h = (parseInt(hm[0])+3).toString();
-        const min = hm[1]; 
+        let h = (parseInt(hm[0])+3).toString();
+        let min = hm[1]; 
+        if(h == "24"){
+            h="00";
+        }
+        if(min == "60"){
+            min="00";
+        }
         if(getCurrentTime()==h+":"+min && getCurrentDate()==d+"/"+m+"/"+y)
         {
             return "только что";
