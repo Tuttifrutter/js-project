@@ -59,6 +59,14 @@ const Subscribe = sequelize.define('subscribe', {
     subuserId : {type: DataTypes.INTEGER}
 })
 
+const Notification = sequelize.define('notification', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    userId_from: {type: DataTypes.INTEGER},
+    userId_to: {type: DataTypes.INTEGER},
+    notific_type: {type: DataTypes.INTEGER},
+    infoId: {type: DataTypes.INTEGER}
+})
+
 User.hasMany(LikeDislike)
 LikeDislike.belongsTo(User)
 
@@ -97,6 +105,7 @@ module.exports = {
     Friend,
     Theme,
     Subscribe,
+    Notification,
     FriendTheme,
     ImageInfo
 }
