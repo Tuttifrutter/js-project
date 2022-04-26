@@ -6,6 +6,7 @@ export default class ImageStore {
         this._themes = []
         this._images = []
         this._comments =[]
+        this._notifications =[]
         this._selectedFriend = {}
         this._selectedTheme = {}
         this._userInfo ={}
@@ -17,6 +18,10 @@ export default class ImageStore {
 
     setComments(comments){
         this._comments = comments
+    }
+
+    setNotifications(notifications){
+        this._notifications = notifications
     }
 
     setFriends(friends) {
@@ -51,6 +56,10 @@ export default class ImageStore {
 
     setUserInfo(info){
         this._userInfo = info
+    }
+
+    get notifications(){
+        return this._notifications
     }
 
     get comments(){

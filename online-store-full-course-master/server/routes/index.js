@@ -5,6 +5,7 @@ const userRouter = require('./userRouter')
 const themeRouter = require('./themeRouter')
 const friendRouter = require('./friendRouter')
 const commentRouter = require('./commentRouter')
+const notificationRouter = require('./notificationRouter')
 const dis_likeRouter = require('./dis_likeRouter')
 const subscribeRouter = require('./subscribeRouter')
 
@@ -14,6 +15,7 @@ router.use('/theme', themeRouter)
 router.use('/image', imageRouter)
 router.use('/dis_like', dis_likeRouter)
 router.use('/comment', commentRouter)
+router.use('/notification', notificationRouter)
 router.use('/subscribe', subscribeRouter)
 
 module.exports = router

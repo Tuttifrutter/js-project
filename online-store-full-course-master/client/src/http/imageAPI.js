@@ -99,6 +99,11 @@ export function getUserProfile(nameId, avatarId){
     return data
 }
 
+export const getNotifications = async (userId_to) => {
+    const {data} = await $authHost.get('api/notification',{params: {userId_to}})
+    return data
+}
+
 export function dataParse(data, db=true){
     let dt;
     if(data!=null && data!=undefined){
