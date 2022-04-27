@@ -104,6 +104,11 @@ export const getNotifications = async (userId_to) => {
     return data
 }
 
+export const deleteNotifications = async (userId_to) => {
+    const {data} = await $authHost.post('api/notification',{userId_to})
+    return data
+}
+
 export function dataParse(data, db=true){
     let dt;
     if(data!=null && data!=undefined){
