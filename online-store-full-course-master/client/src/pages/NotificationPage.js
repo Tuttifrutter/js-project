@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {Col, Container} from "react-bootstrap";
 import {useParams} from 'react-router-dom'
-import {deleteNotifications, getNotifications} from "../http/imageAPI";
+import {getNotifications} from "../http/imageAPI";
 import {Context} from "../index";
 import NotificationList from '../components/NotificationList';
 import { observer } from 'mobx-react-lite';
@@ -13,7 +13,6 @@ const NotificationPage  = observer(() => {
     useEffect(() => {
         console.log(id)
         getNotifications(id).then(data => image.setNotifications(data));
-        deleteNotifications(id);
     }, [])
 
     return (

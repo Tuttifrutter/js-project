@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 import styles from "./Notification/Card.module.css"
 import { Image } from 'react-bootstrap';
 import { USERPAGE_ROUTE, IMAGE_ROUTE } from '../utils/consts';
-import { getImgNick, dataParse } from '../http/imageAPI';
+import { getComImgNick, dataParse, deleteNotification } from '../http/imageAPI';
 
 const NotificationItem = ({notific}) => {
     const history = useHistory()
@@ -16,12 +16,12 @@ const NotificationItem = ({notific}) => {
     ]
 
     return (
-            <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
+            <div onClick={() => deleteNotification(notific.id)}><Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
             <div className={styles.Card}>
             <div className={styles.Card_header}>
             <Image id = {"userImg"+notific.id} className={styles.Card__userLogo} onClick={(event) => {localStorage.setItem("choosenUserId", notific.userId_from);  history.push(USERPAGE_ROUTE + '/' + notific.userId_from)}}/>
             <div clasName={styles.Card_userDate}>
-                    <div id = {"nickName"+notific.id} className={styles.Card__userName}>{getImgNick(notific.id, "notificUserInfo")} </div> 
+                    <div id = {"nickName"+notific.id} className={styles.Card__userName}>{getComImgNick(notific.id, "notificUserInfo")} </div> 
                     
                     <div className={styles.Card__userPosition}><div >{nt[notific.notific_type-1].text}<NavLink to={nt[notific.notific_type-1].link}>{nt[notific.notific_type-1].title}</NavLink></div>{dataParse(notific.createdAt)}</div>
                 </div>
@@ -31,7 +31,7 @@ const NotificationItem = ({notific}) => {
                 
             </div>
         </div>
-    </Card>
+    </Card></div>
         
     );
 };

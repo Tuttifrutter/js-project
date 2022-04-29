@@ -16,11 +16,11 @@ class NotificationController{
     }
     
     async delete(req, res){
-        const {userId_to} = req.body
-        if(!userId_to){
+        const {id} = req.body
+        if(!id){
             return res.json(ApiError.badRequest('Не заданы все параметры'))
         }
-        const delNode = await Notification.findAll({where:{userId_to}}).then(task => {
+        const delNode = await Notification.findAll({where:{id}}).then(task => {
             for(let i=0; i<task.length; i++)
             task[i].destroy()
         })

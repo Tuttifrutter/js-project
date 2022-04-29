@@ -116,8 +116,8 @@ export const getNotifications = async (userId_to) => {
     return data
 }
 
-export const deleteNotifications = async (userId_to) => {
-    const {data} = await $authHost.post('api/notification',{userId_to})
+export const deleteNotification = async (id) => {
+    const {data} = await $authHost.post('api/notification',{id})
     return data
 }
 
