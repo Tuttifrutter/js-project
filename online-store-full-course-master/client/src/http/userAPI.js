@@ -58,14 +58,17 @@ export const subButton = async (value) =>{
     let res;
     if(value == "*"){
         res = "Изменить"
+        document.getElementById("subbtn").disabled = true;
     }else if(value == true){
         res = "Вы подписаны"
+        document.getElementById("subbtn").disabled = false;
     }else if(value == false){
         res = "Подписаться"
+        document.getElementById("subbtn").disabled = false;
     }else{
         res = "Опачки"
+        document.getElementById("subbtn").disabled = true;
     }
-
     document.getElementById("subbtn").innerHTML=res;
     return res
 }

@@ -10,9 +10,9 @@ import { getComImgNick, dataParse, deleteNotification } from '../http/imageAPI';
 const NotificationItem = ({notific}) => {
     const history = useHistory()
     const nt = [
-        { key: 1, type: "rating_notification", text: " оценил Вашу ", link: IMAGE_ROUTE + '/' + notific.infoId, title: "запись"},
-        { key: 2, type: "comment_notification", text: " оставил комментарий под Вашей ", link: IMAGE_ROUTE + '/' + notific.infoId, title: "записью"},
-        { key: 3, type: "subscribe_notification", text: " подписался на Вас", link: "", title: "" }
+        { key: 1, type: "rating_notification", text: "Пользователь оценил Вашу ", link: IMAGE_ROUTE + '/' + notific.infoId, title: "запись"},
+        { key: 2, type: "comment_notification", text: "Пользователь оставил комментарий под Вашей ", link: IMAGE_ROUTE + '/' + notific.infoId, title: "записью"},
+        { key: 3, type: "subscribe_notification", text: "Пользователь подписался на Вас", link: "", title: "" }
     ]
 
     return (
