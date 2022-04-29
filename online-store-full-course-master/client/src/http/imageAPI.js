@@ -2,6 +2,7 @@ import {$authHost, $host} from "./index";
 import jwt_decode from "jwt-decode";
 
 
+
 export const createFriend = async (friend) => {
     const {data} = await $authHost.post('api/friend', friend)
     return data
@@ -92,6 +93,17 @@ export function getUserProfile(nameId, avatarId){
         document.getElementById("nickName"+id).innerHTML = nick;
         document.getElementById("userImg"+id).src = process.env.REACT_APP_API_URL +img;
     }}, 10)
+ }
+
+ export function getComImgNick(id, local){
+    setTimeout(()=>{
+        if(document.getElementById("nickName"+id)!=null && localStorage.getItem(local+id)!=null){
+            const res = localStorage.getItem(local+id).split(" ");
+            const nick = res[0].slice(res[0].indexOf("'")+1, res[0].lastIndexOf("'"));
+            const img = res[1].slice(res[1].indexOf("'")+1, res[1].lastIndexOf("'"));
+        document.getElementById("nickName"+id).innerHTML = nick;
+        document.getElementById("userImg"+id).src = process.env.REACT_APP_API_URL +img;
+    }}, 500)
  }
 
  export const getComments = async (imageId) => {
@@ -190,12 +202,16 @@ export const sendComment = async (imageId, userId) => {
     if(t.value!="" && t.value!=null && t.value!=undefined ){
         var text = t.value;
         if(text.length>=500){
-            alert("Комментарий слишком большой, уложитесь в 500 символов, друг");
+            alert("Комментарий слишком большой, уложись в 500 символов, друг");
+            return null;
         }else{
             data = await $authHost.post('api/comment',{imageId, userId, text}).then(result => alert("Комментарий: '"+result.data.text+"' добавлен"));
             t.value = "";
-            window.location.reload();
+            return data;
         }
-    }else
+    }else{
         alert("Комментарий пустой, как моя жизнь(((");
+        return null;
+    }
+        
 }

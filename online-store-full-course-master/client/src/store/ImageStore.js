@@ -19,7 +19,9 @@ export default class ImageStore {
     setComments(comments){
         this._comments = comments
     }
-
+    addComment(comment){
+        this._comments.push(comment);
+    }
     setNotifications(notifications){
         this._notifications = notifications
     }
