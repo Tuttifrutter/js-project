@@ -97,6 +97,26 @@ class UserController {
         const token = generateJwt(req.user.id, req.user.email, req.user.role)
         return res.json({token})
     }
+
+    async getAllUsers(req, res){
+        let user =[];
+         user = await User.findAll()
+        if (!user) {
+            return next(ApiError.internal('Пользователей нет'))
+        }
+        let userinfo =[];
+        for(let i = 0; i<user.length; i++){
+            userinfo.push({id : user[i].id,
+                nick_name : user[i].nick_name,
+                first_name : user[i].first_name,
+                second_name : user[i].second_name,
+                status : user[i].status,
+                email: user[i].email,
+                img: user[i].img});
+        }
+        
+        return res.json(userinfo)
+    }
 }
 
 module.exports = new UserController()

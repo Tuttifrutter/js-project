@@ -56,25 +56,32 @@ export const subscribeOrNot= async (userId, subuserId) => {
 
 export const subButton = async (value) =>{ 
     let res;
+    let flag = true;
     if(value == "*"){
         res = "Изменить"
-        document.getElementById("subbtn").disabled = true;
+        flag = true;
     }else if(value == true){
         res = "Вы подписаны"
-        document.getElementById("subbtn").disabled = false;
+        flag = false;
     }else if(value == false){
         res = "Подписаться"
-        document.getElementById("subbtn").disabled = false;
+        flag = false;
     }else{
         res = "Опачки"
-        document.getElementById("subbtn").disabled = true;
+        flag = true;
     }
-    document.getElementById("subbtn").innerHTML=res;
+        document.getElementById("subbtn").innerHTML=res;
+        document.getElementById("subbtn").disabled = flag;
     return res
 }
 
 export const setStatus= async (userId, value) =>{
     localStorage.setItem('status', value);
     const {data} = await $host.post('api/user/status', {userId, value}) 
+    return data
+}
+
+export const getAllUsers = async () => {
+    const {data} = await $authHost.get('api/user/all' )
     return data
 }

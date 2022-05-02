@@ -14,6 +14,7 @@ import Image from "react-bootstrap/Image";
 import styles from './Header/Header.module.css' 
 import st from './iconfont/material-icons.css'
 import { Dropdown } from 'react-bootstrap';
+import UsersSearch from './UsersSearch.js';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
@@ -31,21 +32,18 @@ const NavBar = observer(() => {
     }
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar className={styles.Header} expand="lg">
             
             <Container>
             <nav className={styles.Header__logo}>PhotoApp</nav>
-            <span>
-            <input type="text" placeholder="Поиск" className={styles.Header__search}/>
-            <span className={"ml-2"}>
-                    <span class="material-icons" >
+            {user.isAuth ?
+            <div className={styles.Header__wrapper}>
+            <div className={"mt-4"}><UsersSearch/></div>   
+                    <div className={"mt-4"}><div class="material-icons" >
                         search
-                    </span>    
-                </span> 
-            </span>
-
-
-        
+                    </div></div> 
+                    </div>
+            :<div></div>}
             <div className={styles.Header__wrapper}>
                 <div className={styles.Header__item}>
                     <span class="material-icons" onClick={()=>localStorage.removeItem("choosenUserId")}>
